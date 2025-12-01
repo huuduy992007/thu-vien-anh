@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Admin/Editor - Quản lý Album & Ảnh</title>
+    <!-- dùng lại css admin -->
+    <link rel="stylesheet" href="./assets/css/media-admin.css">
+</head>
+
+<body class="admin-page">
+
+    <div class="admin-wrap">
+        <header class="admin-header">
+            <h1>Quản lý Album & Ảnh</h1>
+            <div class="admin-actions">
+                <button id="btnBackHome">← Về trang chính</button>
+            </div>
+        </header>
+
+        <main class="admin-main">
+            <!-- FORM TẠO ALBUM -->
+            <section class="admin-section">
+                <h2>Thêm album mới</h2>
+                <form id="albumForm">
+                    <div class="form-row">
+                        <label for="albumName">Tên album</label>
+                        <input type="text" id="albumName" required>
+                    </div>
+
+                    <div class="form-row">
+                        <label for="albumCover">Ảnh cover (URL)</label>
+                        <input type="url" id="albumCover" required>
+                    </div>
+
+                    <div class="form-row">
+                        <label for="albumDesc">Mô tả</label>
+                        <textarea id="albumDesc" rows="2"></textarea>
+                    </div>
+
+                    <button type="submit" id="btnSaveAlbum">Lưu album</button>
+                </form>
+            </section>
+
+            <!-- DANH SÁCH ALBUM -->
+            <section class="admin-section">
+                <h2>Danh sách album</h2>
+                <table id="albumsTable">
+                    <thead>
+                        <tr>
+                            <th>Tên album</th>
+                            <th>Trạng thái</th>
+                            <th>Ngày tạo</th>
+                            <th>Hành động</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- JS render -->
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- FORM UPLOAD ẢNH GIẢ LẬP -->
+            <section class="admin-section">
+                <h2>Upload ảnh (giả lập)</h2>
+                <form id="mediaForm">
+                    <div class="form-row">
+                        <label for="mediaAlbum">Chọn album</label>
+                        <select id="mediaAlbum" required>
+                            <!-- JS fill -->
+                        </select>
+                    </div>
+
+                    <div class="form-row">
+                        <label for="mediaTitle">Tiêu đề ảnh</label>
+                        <input type="text" id="mediaTitle" required>
+                    </div>
+
+                    <div class="form-row">
+                        <label for="mediaUrl">Ảnh (URL)</label>
+                        <input type="url" id="mediaUrl" required>
+                    </div>
+
+                    <button type="submit" id="btnSaveMedia">Thêm ảnh</button>
+                </form>
+            </section>
+
+            <!-- DANH SÁCH ẢNH THEO ALBUM ĐÃ CHỌN -->
+            <section class="admin-section">
+                <h2>Ảnh trong album đã chọn</h2>
+                <table id="mediaTable">
+                    <thead>
+                        <tr>
+                            <th>Ảnh</th>
+                            <th>Tiêu đề</th>
+                            <th>Lượt xem</th>
+                            <th>Like</th>
+                            <th>Hành động</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- JS render -->
+                    </tbody>
+                </table>
+            </section>
+        </main>
+    </div>
+
+    <script src="media-admin.js"></script>
+</body>
+
+</html>

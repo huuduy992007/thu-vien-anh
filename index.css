@@ -1,0 +1,907 @@
+/* ========== RESET NHẸ ========== */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", Roboto, sans-serif;
+    color: #111827;
+    background:
+        radial-gradient(circle at 0 0, rgba(96, 165, 250, 0.35), transparent 60%),
+        radial-gradient(circle at 100% 100%, rgba(244, 114, 182, 0.35), transparent 60%),
+        linear-gradient(180deg, #f9fafb, #eef2ff 40%, #fefce8 100%);
+    min-height: 100vh;
+}
+
+/* ========== HEADER + NAVBAR ========== */
+#header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+}
+
+#nav-bar {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    background: rgba(255, 255, 255, 0.96);
+    border-bottom: 1px solid rgba(209, 213, 219, 0.9);
+    box-shadow: 0 10px 30px rgba(148, 163, 184, 0.55);
+}
+
+#menu-left,
+#menu-right {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+#menu-left a,
+#menu-right a {
+    text-decoration: none;
+    color: #1f2937;
+    font-size: 0.9rem;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    position: relative;
+    padding-bottom: 4px;
+    transition: color 0.2s ease, opacity 0.2s ease;
+}
+
+#menu-left a::after,
+#menu-right a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 2px;
+    border-radius: 999px;
+    background: linear-gradient(to right, #f97316, #ec4899);
+    box-shadow: 0 0 8px rgba(249, 115, 22, 0.7);
+    transition: width 0.25s ease;
+}
+
+#menu-left a:hover,
+#menu-right a:hover {
+    color: #111827;
+}
+
+#menu-left a:hover::after,
+#menu-right a:hover::after {
+    width: 100%;
+}
+
+/* dropdown */
+.dropdown {
+    position: relative;
+}
+
+.dropdown>a {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 110%;
+    left: 0;
+    min-width: 160px;
+    list-style: none;
+    padding: 8px 0;
+    background: #ffffff;
+    border-radius: 12px;
+    border: 1px solid rgba(209, 213, 219, 0.9);
+    box-shadow: 0 18px 40px rgba(148, 163, 184, 0.6);
+    opacity: 0;
+    transform: translateY(6px);
+    pointer-events: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    z-index: 40;
+}
+
+.dropdown-menu li {
+    padding: 0;
+}
+
+.dropdown-menu a {
+    display: block;
+    padding: 7px 14px;
+    font-size: 0.85rem;
+    text-transform: none;
+    letter-spacing: 0.02em;
+    color: #111827;
+}
+
+.dropdown-menu a::after {
+    display: none;
+}
+
+.dropdown-menu a:hover {
+    background: linear-gradient(90deg, rgba(249, 115, 22, 0.12), transparent);
+}
+
+.dropdown:hover .dropdown-menu {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+/* ========== MAIN ========== */
+#content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 90px 20px 40px;
+}
+
+#content h1 {
+    text-align: center;
+    font-size: 2rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin-bottom: 30px;
+    color: #111827;
+    text-shadow: 0 0 12px rgba(251, 191, 36, 0.7);
+}
+
+/* ========== HERO SLIDER ========== */
+.hero-slider-wrapper {
+    margin-bottom: 40px;
+}
+
+.slider {
+    position: relative;
+    overflow: hidden;
+    border-radius: 24px;
+    box-shadow: 0 18px 40px rgba(148, 163, 184, 0.7);
+    background: #ffffff;
+}
+
+.slider .slides {
+    display: flex;
+    transition: transform 0.6s ease;
+}
+
+.slide {
+    min-width: 100%;
+    position: relative;
+}
+
+.slide img {
+    width: 100%;
+    height: 420px;
+    object-fit: cover;
+    display: block;
+    filter: saturate(1.1) contrast(1.03);
+}
+
+/* overlay mờ & gradient sáng */
+.slide::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(to bottom, rgba(249, 250, 251, 0.05), rgba(249, 250, 251, 0.95));
+    mix-blend-mode: screen;
+}
+
+/* nút trái phải */
+.slider-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    border: none;
+    width: 42px;
+    height: 42px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.96);
+    color: #111827;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    box-shadow: 0 10px 28px rgba(148, 163, 184, 0.8);
+    transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+    opacity: 0.9;
+}
+
+.slider-btn.prev {
+    left: 14px;
+}
+
+.slider-btn.next {
+    right: 14px;
+}
+
+.slider-btn:hover {
+    background: linear-gradient(135deg, #f97316, #ec4899);
+    color: #ffffff;
+    transform: translateY(-50%) translateY(-1px);
+    box-shadow: 0 14px 36px rgba(248, 113, 113, 0.8);
+    opacity: 1;
+}
+
+/* dots */
+.slider-dots {
+    position: absolute;
+    left: 50%;
+    bottom: 18px;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+}
+
+.slider-dots .dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 999px;
+    background: rgba(148, 163, 184, 0.9);
+    box-shadow: 0 0 5px rgba(148, 163, 184, 0.8);
+    cursor: pointer;
+    transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease, width 0.2s ease;
+}
+
+.slider-dots .dot.active {
+    width: 22px;
+    background: linear-gradient(90deg, #f97316, #ec4899);
+    box-shadow: 0 0 12px rgba(248, 113, 113, 0.9);
+    transform: translateY(-1px);
+}
+
+/* ========== CAROUSEL ALBUM MỚI ========== */
+.carousel-section {
+    margin: 40px 0 32px;
+}
+
+.carousel-section h2 {
+    font-size: 1.4rem;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: #111827;
+    position: relative;
+}
+
+.carousel-section h2::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 75px;
+    height: 2px;
+    border-radius: 999px;
+    background: linear-gradient(to right, #f97316, #ec4899);
+    box-shadow: 0 0 10px rgba(249, 115, 22, 0.6);
+}
+
+.carousel {
+    position: relative;
+    background: #ffffff;
+    border-radius: 20px;
+    border: 1px solid rgba(209, 213, 219, 0.9);
+    padding: 14px 40px;
+    box-shadow: 0 16px 40px rgba(148, 163, 184, 0.7);
+    overflow: hidden;
+}
+
+.carousel-track-container {
+    overflow: hidden;
+}
+
+.carousel-track {
+    display: flex;
+    gap: 18px;
+    transition: transform 0.5s ease;
+}
+
+/* card album (JS render) */
+.album-card {
+    min-width: 220px;
+    max-width: 220px;
+    background: #ffffff;
+    border-radius: 18px;
+    border: 1px solid rgba(209, 213, 219, 0.9);
+    box-shadow: 0 10px 26px rgba(148, 163, 184, 0.7);
+    overflow: hidden;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.album-card img {
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+}
+
+.album-card-content {
+    padding: 10px 11px 12px;
+}
+
+.album-card-title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+    color: #111827;
+}
+
+.album-card-meta {
+    font-size: 0.8rem;
+    color: #6b7280;
+}
+
+.album-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 18px 36px rgba(249, 115, 22, 0.45);
+    border-color: #f97316;
+}
+
+/* nút trái phải carousel */
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    border: none;
+    width: 34px;
+    height: 34px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.96);
+    color: #111827;
+    cursor: pointer;
+    font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 26px rgba(148, 163, 184, 0.7);
+    transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+    opacity: 0.9;
+}
+
+.carousel-btn.prev {
+    left: 10px;
+}
+
+.carousel-btn.next {
+    right: 10px;
+}
+
+.carousel-btn:hover {
+    background: linear-gradient(135deg, #f97316, #ec4899);
+    color: #ffffff;
+    transform: translateY(-50%) translateY(-1px);
+    box-shadow: 0 14px 34px rgba(248, 113, 113, 0.75);
+    opacity: 1;
+}
+
+/* ========== BLOG SECTION ========== */
+.blog-section {
+    margin: 30px 0 50px;
+}
+
+.blog-section h2 {
+    font-size: 1.4rem;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: #111827;
+    position: relative;
+}
+
+.blog-section h2::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 100px;
+    height: 2px;
+    border-radius: 999px;
+    background: linear-gradient(to right, #f97316, #ec4899);
+    box-shadow: 0 0 10px rgba(249, 115, 22, 0.6);
+}
+
+.blog-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 18px;
+    margin-top: 18px;
+}
+
+/* card blog – JS render .blog-card */
+.blog-card {
+    background: #ffffff;
+    border-radius: 18px;
+    border: 1px solid rgba(209, 213, 219, 0.9);
+    padding: 14px 14px 16px;
+    box-shadow: 0 12px 30px rgba(148, 163, 184, 0.7);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.18s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.blog-card::before {
+    content: "";
+    position: absolute;
+    inset: -30%;
+    background: radial-gradient(circle at 0 0, rgba(253, 186, 116, 0.4), transparent 65%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.blog-card:hover::before {
+    opacity: 1;
+}
+
+.blog-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 18px 40px rgba(248, 113, 113, 0.55);
+    border-color: #f97316;
+}
+
+.blog-card-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #111827;
+}
+
+.blog-card-meta {
+    font-size: 0.8rem;
+    color: #6b7280;
+}
+
+.blog-card-excerpt {
+    font-size: 0.9rem;
+    color: #374151;
+}
+
+/* ========== FOOTER ========== */
+#footer {
+    border-top: 1px solid rgba(209, 213, 219, 0.9);
+    background: #f9fafb;
+    color: #6b7280;
+    padding: 18px 20px;
+    text-align: center;
+    font-size: 0.85rem;
+    margin-top: 20px;
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 900px) {
+    #nav-bar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    #menu-left,
+    #menu-right {
+        flex-wrap: wrap;
+        justify-content: flex-start;
+    }
+
+    #content {
+        padding-top: 80px;
+    }
+
+    .slide img {
+        height: 320px;
+    }
+}
+
+@media (max-width: 640px) {
+    #menu-right {
+        font-size: 0.8rem;
+        gap: 10px;
+    }
+
+    #content h1 {
+        font-size: 1.6rem;
+    }
+
+    .carousel {
+        padding: 12px 34px;
+    }
+
+    .album-card {
+        min-width: 190px;
+        max-width: 190px;
+    }
+}
+
+/* ========= AVATAR TRÊN NAVBAR ========= */
+.nav-avatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #111827;
+    background:
+        radial-gradient(circle at 30% 0, rgba(249, 115, 22, 0.9), transparent 60%),
+        radial-gradient(circle at 70% 100%, rgba(236, 72, 153, 0.85), transparent 60%),
+        #ffffff;
+    border: 1px solid rgba(248, 113, 113, 0.8);
+    box-shadow: 0 6px 16px rgba(148, 163, 184, 0.8);
+    overflow: hidden;
+    background-size: cover;
+    background-position: center;
+}
+
+.nav-avatar.has-image {
+    color: transparent;
+    /* dùng ảnh làm nền, ẩn chữ */
+    text-shadow: none;
+}
+
+.nav-greeting-text {
+    font-size: 0.85rem;
+    text-transform: none;
+}
+
+/* ================== FIX CAROUSEL ALBUM ================== */
+/* Mỗi phần tử con của .carousel-track (JS render) sẽ là 1 card album */
+.carousel-track>* {
+    flex: 0 0 260px;
+    /* rộng hơn 1 xíu cho đủ chỗ chữ */
+    max-width: 260px;
+    background: #ffffff;
+    border-radius: 18px;
+    border: 1px solid rgba(209, 213, 219, 0.9);
+    box-shadow: 0 10px 26px rgba(148, 163, 184, 0.7);
+    overflow: hidden;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+/* Ảnh cover album trong carousel */
+.carousel-track>* img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    display: block;
+}
+
+/* Nội dung text của album (nếu JS có div bọc) */
+.carousel-track>* div,
+.carousel-track>* .album-info {
+    padding: 10px 11px 12px;
+    font-size: 0.9rem;
+    color: #111827;
+}
+
+/* Hover card album */
+.carousel-track>*:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 18px 36px rgba(249, 115, 22, 0.45);
+    border-color: #f97316;
+}
+
+/* Tiêu đề + mô tả album */
+.carousel-track>* h3,
+.carousel-track>* p {
+    margin: 0;
+    padding: 0 14px;
+    /* đẩy chữ cách hai bên */
+    line-height: 1.35;
+}
+
+.carousel-track>* h3 {
+    padding-top: 10px;
+    font-size: 0.95rem;
+    font-weight: 700;
+}
+
+.carousel-track>* p {
+    padding-bottom: 10px;
+    font-size: 0.85rem;
+    color: #4b5563;
+}
+
+.carousel-track>* .album-info {
+    padding: 10px 14px 12px;
+}
+
+/* ================== BLOG KỸ THUẬT CHỤP ẢNH ================== */
+#blog-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 18px;
+    margin-top: 18px;
+}
+
+/* Card blog */
+#blog-list .blog-card {
+    background: #ffffff;
+    border-radius: 18px;
+    border: 1px solid rgba(209, 213, 219, 0.9);
+    box-shadow: 0 12px 30px rgba(148, 163, 184, 0.7);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    position: relative;
+    transition: transform 0.18s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+/* Ảnh blog: cố định cao, tránh kéo dài cả màn hình */
+#blog-list .blog-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    display: block;
+}
+
+/* Phần text blog */
+#blog-list .blog-content {
+    padding: 12px 14px 14px;
+}
+
+#blog-list .blog-content h3 {
+    font-size: 1rem;
+    margin-bottom: 6px;
+    color: #111827;
+}
+
+#blog-list .blog-content p {
+    font-size: 0.9rem;
+    color: #374151;
+    margin-bottom: 10px;
+}
+
+/* Link "Xem thêm" */
+#blog-list .read-more {
+    font-size: 0.85rem;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: #f97316;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    position: relative;
+}
+
+#blog-list .read-more::after {
+    content: "→";
+    font-size: 0.9rem;
+    transition: transform 0.2s ease;
+}
+
+#blog-list .read-more:hover {
+    color: #ec4899;
+}
+
+#blog-list .read-more:hover::after {
+    transform: translateX(3px);
+}
+
+/* ===== FIX KÍCH THƯỚC ẢNH SLIDER ===== */
+.hero-slider-wrapper .slider {
+    /* chiều cao cố định cho desktop, bạn có thể chỉnh 420, 450... tuỳ ý */
+    height: 420px;
+    overflow: hidden;
+    /* ẩn phần bị cắt bớt của ảnh */
+}
+
+.hero-slider-wrapper .slides {
+    height: 100%;
+}
+
+.hero-slider-wrapper .slide {
+    height: 100%;
+}
+
+.hero-slider-wrapper .slides img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* cắt ảnh để không méo, fill hết khung */
+    display: block;
+}
+
+
+
+/* ========== CHATBOT WIDGET ========== */
+
+.chatbot-widget {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    z-index: 999;
+    font-family: inherit;
+}
+
+/* Nút tròn mở chat */
+.chatbot-toggle {
+    width: 56px;
+    height: 56px;
+    border-radius: 999px;
+    border: none;
+    background: linear-gradient(135deg, #4f46e5, #22c55e);
+    color: #fff;
+    font-size: 26px;
+    box-shadow: 0 18px 35px rgba(15, 23, 42, 0.35);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s;
+}
+
+.chatbot-toggle:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 22px 40px rgba(15, 23, 42, 0.45);
+}
+
+/* Cửa sổ chat */
+.chatbot-window {
+    position: absolute;
+    right: 0;
+    bottom: 70px;
+    width: 320px;
+    max-height: 430px;
+    background: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 24px 55px rgba(15, 23, 42, 0.45);
+    display: none;
+    /* mặc định ẩn */
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* Khi mở */
+.chatbot-widget.open .chatbot-window {
+    display: flex;
+}
+
+.chatbot-widget.open .chatbot-toggle {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Header */
+.chatbot-header {
+    padding: 12px 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(135deg, #4f46e5, #22c55e);
+    color: #fff;
+}
+
+.chatbot-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+}
+
+.chatbot-info {
+    flex: 1;
+}
+
+.chatbot-title {
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.chatbot-subtitle {
+    font-size: 11px;
+    opacity: 0.9;
+}
+
+.chatbot-close {
+    border: none;
+    background: transparent;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* Vùng tin nhắn */
+.chatbot-messages {
+    padding: 10px 12px;
+    flex: 1;
+    overflow-y: auto;
+    background: #f9fafb;
+}
+
+.chatbot-msg {
+    margin-bottom: 8px;
+    max-width: 90%;
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+.chatbot-msg.bot {
+    background: #eef2ff;
+    color: #1f2933;
+    padding: 8px 10px;
+    border-radius: 10px 10px 10px 2px;
+}
+
+.chatbot-msg.user {
+    background: #22c55e;
+    color: #fff;
+    padding: 8px 10px;
+    border-radius: 10px 10px 2px 10px;
+    margin-left: auto;
+}
+
+/* Ô nhập */
+.chatbot-input-area {
+    display: flex;
+    gap: 6px;
+    padding: 8px 10px 10px;
+    border-top: 1px solid #e5e7eb;
+    background: #fff;
+}
+
+.chatbot-input-area input {
+    flex: 1;
+    padding: 8px 10px;
+    border-radius: 999px;
+    border: 1px solid #e5e7eb;
+    font-size: 13px;
+    outline: none;
+}
+
+.chatbot-input-area input:focus {
+    border-color: #4f46e5;
+    box-shadow: 0 0 0 1px rgba(79, 70, 229, 0.15);
+}
+
+.chatbot-input-area button {
+    border: none;
+    padding: 8px 12px;
+    border-radius: 999px;
+    background: #4f46e5;
+    color: #fff;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+/* Mobile: thu nhỏ một chút */
+@media (max-width: 768px) {
+    .chatbot-widget {
+        right: 12px;
+        bottom: 12px;
+    }
+
+    .chatbot-window {
+        width: 280px;
+        bottom: 64px;
+    }
+}

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi tiết bài viết | Thư Viện Ảnh</title>
+    <link rel="stylesheet" href="./assets/css/post-detail.css">
+    <script defer src="./main.js"></script>
+    <script defer src="./post-detail.js"></script>
+</head>
+
+<body>
+    <header id="header">
+        <nav id="nav-bar">
+            <ul id="menu-left">
+                <li><a href="index.html">Trang Chủ</a></li>
+                <li><a href="#">Thư Viện Ảnh</a></li>
+                <li><a href="index.html#blog-section">Blog Kỹ Thuật Chụp Ảnh</a></li>
+                <li><a href="#">Giới Thiệu</a></li>
+                <li><a href="#">Liên Hệ</a></li>
+                <li class="dropdown">
+                    <a href="#">Thêm ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Giao Diện</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Thông Báo</a></li>
+                        <li><a href="#">Ngôn Ngữ</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+            <ul id="menu-right">
+                <li id="login-item"><a href="login.html">Đăng Nhập</a></li>
+                <li id="register-item"><a href="register.html">Đăng Ký</a></li>
+                <li id="user-greeting" style="display:none;">
+                    <a href="user-info.html" id="greeting-link">Xin chào</a>
+                </li>
+                <li id="admin-panel-item" style="display:none;">
+                    <a href="admin.html">Admin Panel</a>
+                </li>
+                <li id="logout-item" style="display:none;">
+                    <a href="#" id="logout-btn">Đăng Xuất</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="post-detail-page">
+        <section class="post-detail" id="post-detail">
+            <!-- JS trong post-detail.js sẽ fill nội dung -->
+            <p>Đang tải bài viết...</p>
+        </section>
+    </main>
+
+    <footer id="footer">

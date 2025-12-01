@@ -1,0 +1,594 @@
+/* ============= RESET ============= */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", Roboto, sans-serif;
+    color: #f9fafb;
+    background:
+        radial-gradient(circle at 10% 0%, rgba(129, 140, 248, 0.2), transparent 55%),
+        radial-gradient(circle at 90% 100%, rgba(45, 212, 191, 0.18), transparent 55%),
+        linear-gradient(135deg, #020617, #020617 40%, #020617 70%, #030712 100%);
+    min-height: 100vh;
+}
+
+/* ============= NAVBAR (giống style chung) ============= */
+#header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+}
+
+#nav-bar {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.96), rgba(15, 23, 42, 0.98));
+    border-bottom: 1px solid rgba(148, 163, 184, 0.35);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.7);
+}
+
+#menu-left,
+#menu-right {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+#menu-left a,
+#menu-right a {
+    text-decoration: none;
+    color: #e5e7eb;
+    font-size: 0.9rem;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    position: relative;
+    padding-bottom: 4px;
+    transition: color 0.2s ease, opacity 0.2s ease;
+}
+
+#menu-left a::after,
+#menu-right a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 2px;
+    border-radius: 999px;
+    background: linear-gradient(to right, #6366f1, #22c55e);
+    box-shadow: 0 0 10px rgba(129, 140, 248, 0.9);
+    transition: width 0.25s ease;
+}
+
+#menu-left a:hover,
+#menu-right a:hover {
+    color: #ffffff;
+}
+
+#menu-left a:hover::after,
+#menu-right a:hover::after {
+    width: 100%;
+}
+
+/* dropdown */
+.dropdown {
+    position: relative;
+}
+
+.dropdown>a {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 110%;
+    left: 0;
+    min-width: 160px;
+    list-style: none;
+    padding: 8px 0;
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.98), rgba(30, 64, 175, 0.98));
+    border-radius: 12px;
+    border: 1px solid rgba(148, 163, 184, 0.5);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.85);
+    opacity: 0;
+    transform: translateY(6px);
+    pointer-events: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    z-index: 40;
+}
+
+.dropdown-menu li {
+    padding: 0;
+}
+
+.dropdown-menu a {
+    display: block;
+    padding: 7px 14px;
+    font-size: 0.85rem;
+    text-transform: none;
+    letter-spacing: 0.02em;
+}
+
+.dropdown-menu a::after {
+    display: none;
+}
+
+.dropdown-menu a:hover {
+    background: linear-gradient(90deg, rgba(99, 102, 241, 0.2), transparent);
+}
+
+.dropdown:hover .dropdown-menu {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+/* avatar trên navbar (dùng chung main.js) */
+.nav-avatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #e5e7eb;
+    background:
+        radial-gradient(circle at 30% 0, rgba(129, 140, 248, 0.8), transparent 60%),
+        radial-gradient(circle at 70% 100%, rgba(45, 212, 191, 0.7), transparent 60%),
+        #020617;
+    border: 1px solid rgba(148, 163, 184, 0.7);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.8);
+    overflow: hidden;
+    background-size: cover;
+    background-position: center;
+}
+
+.nav-avatar.has-image {
+    color: transparent;
+    text-shadow: none;
+}
+
+.nav-greeting-text {
+    font-size: 0.85rem;
+    text-transform: none;
+}
+
+/* ============= MAIN / LAYOUT TRANG ALBUM ============= */
+.album-page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 90px 20px 40px;
+    /* chừa chỗ cho navbar sticky */
+}
+
+/* ----- header album (cover + info) ----- */
+.album-header {
+    margin-bottom: 30px;
+}
+
+.album-header-card {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+    gap: 22px;
+    background: radial-gradient(circle at 0 0, rgba(99, 102, 241, 0.28), transparent 60%),
+        radial-gradient(circle at 100% 100%, rgba(45, 212, 191, 0.25), transparent 60%),
+        rgba(15, 23, 42, 0.98);
+    border-radius: 24px;
+    border: 1px solid rgba(148, 163, 184, 0.4);
+    box-shadow: 0 22px 60px rgba(0, 0, 0, 0.9);
+    overflow: hidden;
+}
+
+.album-cover {
+    position: relative;
+    overflow: hidden;
+}
+
+.album-cover img {
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+    display: block;
+    filter: saturate(1.08) contrast(1.05);
+    transition: transform 0.5s ease;
+}
+
+.album-cover::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(15, 23, 42, 0.7), transparent 40%);
+    mix-blend-mode: multiply;
+}
+
+.album-header-card:hover .album-cover img {
+    transform: scale(1.04);
+}
+
+.album-info {
+    padding: 18px 18px 18px 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    justify-content: center;
+}
+
+.album-info h1 {
+    font-size: 1.6rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    text-shadow: 0 0 20px rgba(129, 140, 248, 0.9);
+}
+
+.album-meta {
+    font-size: 0.9rem;
+    color: #a5b4fc;
+}
+
+.album-info p {
+    font-size: 0.95rem;
+    color: #e5e7eb;
+}
+
+.back-link {
+    margin-top: 10px;
+    align-self: flex-start;
+    font-size: 0.85rem;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: #a5b4fc;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.back-link:hover {
+    color: #c7d2fe;
+}
+
+.back-link::before {
+    content: "←";
+    font-size: 0.9rem;
+}
+
+/* ----- danh sách ảnh ----- */
+.album-photos {
+    margin-top: 20px;
+}
+
+.album-photos h2 {
+    font-size: 1.3rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 16px;
+    position: relative;
+}
+
+.album-photos h2::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 90px;
+    height: 2px;
+    border-radius: 999px;
+    background: linear-gradient(to right, #6366f1, #22c55e);
+    box-shadow: 0 0 10px rgba(129, 140, 248, 0.9);
+}
+
+/* grid ảnh */
+.album-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 18px;
+}
+
+/* card ảnh */
+.photo-card {
+    background: linear-gradient(145deg, rgba(15, 23, 42, 0.96), rgba(15, 23, 42, 1));
+    border-radius: 18px;
+    border: 1px solid rgba(148, 163, 184, 0.4);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.9);
+    overflow: hidden;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.18s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.photo-thumb {
+    position: relative;
+    overflow: hidden;
+}
+
+.photo-thumb img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.45s ease;
+}
+
+.photo-card:hover .photo-thumb img {
+    transform: scale(1.06);
+}
+
+/* info dưới ảnh */
+.photo-info {
+    padding: 10px 12px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.photo-info h3 {
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+.photo-stats {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    font-size: 0.85rem;
+}
+
+/* nút like */
+.like-btn {
+    border: none;
+    border-radius: 999px;
+    padding: 4px 10px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: rgba(239, 68, 68, 0.12);
+    color: #fecaca;
+    border: 1px solid rgba(248, 113, 113, 0.7);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.7);
+    transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+}
+
+.like-btn:hover {
+    background: rgba(248, 113, 113, 0.25);
+    transform: translateY(-1px);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.9);
+}
+
+.like-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 5px 14px rgba(0, 0, 0, 0.9);
+}
+
+/* khi đã like */
+.like-btn.liked {
+    background: linear-gradient(135deg, #fb7185, #fb923c);
+    color: #111827;
+    border-color: transparent;
+}
+
+/* lượt xem */
+.view-count {
+    color: #9ca3af;
+}
+
+/* ============= FOOTER ============= */
+#footer {
+    border-top: 1px solid rgba(31, 41, 55, 0.9);
+    background: radial-gradient(circle at 50% 0, rgba(129, 140, 248, 0.32), transparent 65%),
+        #020617;
+    color: #9ca3af;
+    padding: 18px 20px;
+    text-align: center;
+    font-size: 0.85rem;
+    margin-top: 24px;
+}
+
+/* ============= RESPONSIVE ============= */
+@media (max-width: 900px) {
+    #nav-bar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    #menu-left,
+    #menu-right {
+        flex-wrap: wrap;
+        justify-content: flex-start;
+    }
+
+    .album-page {
+        padding-top: 80px;
+    }
+
+    .album-header-card {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .album-cover img {
+        height: 240px;
+    }
+}
+
+@media (max-width: 640px) {
+    #menu-right {
+        font-size: 0.8rem;
+        gap: 10px;
+    }
+
+    .album-info h1 {
+        font-size: 1.3rem;
+    }
+
+    .photo-thumb img {
+        height: 170px;
+    }
+}
+
+
+
+/* SỬA SANG TÔNG SÁNG */
+/* ================= THEME SÁNG CHI TIẾT ALBUM ================= */
+
+body {
+    color: #111827;
+    background:
+        radial-gradient(circle at 0 0, rgba(96, 165, 250, 0.3), transparent 60%),
+        radial-gradient(circle at 100% 100%, rgba(244, 114, 182, 0.28), transparent 60%),
+        linear-gradient(180deg, #f9fafb, #eef2ff 40%, #fef9c3 100%);
+}
+
+/* NAVBAR sáng */
+#nav-bar {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    background: rgba(255, 255, 255, 0.96);
+    border-bottom: 1px solid rgba(209, 213, 219, 0.9);
+    box-shadow: 0 10px 30px rgba(148, 163, 184, 0.55);
+}
+
+#menu-left a,
+#menu-right a {
+    color: #1f2937;
+}
+
+#menu-left a::after,
+#menu-right a::after {
+    background: linear-gradient(to right, #f97316, #ec4899);
+    box-shadow: 0 0 8px rgba(249, 115, 22, 0.7);
+}
+
+/* avatar nav sáng hơn */
+.nav-avatar {
+    color: #111827;
+    background:
+        radial-gradient(circle at 30% 0, rgba(249, 115, 22, 0.9), transparent 60%),
+        radial-gradient(circle at 70% 100%, rgba(236, 72, 153, 0.85), transparent 60%),
+        #ffffff;
+    border: 1px solid rgba(248, 113, 113, 0.8);
+    box-shadow: 0 6px 16px rgba(148, 163, 184, 0.7);
+}
+
+/* Layout chính */
+.album-page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 90px 20px 40px;
+}
+
+/* Header album sáng */
+.album-header-card {
+    background: #ffffff;
+    border-radius: 24px;
+    border: 1px solid rgba(209, 213, 219, 0.9);
+    box-shadow: 0 18px 40px rgba(148, 163, 184, 0.6);
+}
+
+.album-cover::after {
+    background: linear-gradient(to top, rgba(15, 23, 42, 0.1), transparent 40%);
+}
+
+.album-info h1 {
+    color: #111827;
+    text-shadow: none;
+}
+
+.album-meta {
+    color: #6b7280;
+}
+
+.album-info p {
+    color: #374151;
+}
+
+.back-link {
+    color: #f97316;
+}
+
+.back-link:hover {
+    color: #ec4899;
+}
+
+/* Tiêu đề “Ảnh trong album” */
+.album-photos h2 {
+    color: #111827;
+}
+
+.album-photos h2::after {
+    background: linear-gradient(to right, #f97316, #ec4899);
+    box-shadow: 0 0 10px rgba(249, 115, 22, 0.7);
+}
+
+/* Card ảnh sáng */
+.photo-card {
+    background: #ffffff;
+    border-radius: 18px;
+    border: 1px solid rgba(209, 213, 219, 0.9);
+    box-shadow: 0 12px 30px rgba(148, 163, 184, 0.6);
+}
+
+.photo-info h3 {
+    color: #111827;
+}
+
+.view-count {
+    color: #6b7280;
+}
+
+/* nút like tươi */
+.like-btn {
+    background: rgba(251, 191, 36, 0.15);
+    color: #b45309;
+    border-color: rgba(251, 146, 60, 0.9);
+    box-shadow: 0 6px 16px rgba(148, 163, 184, 0.6);
+}
+
+.like-btn:hover {
+    background: rgba(251, 191, 36, 0.25);
+    box-shadow: 0 10px 24px rgba(248, 181, 129, 0.7);
+}
+
+.like-btn.liked {
+    background: linear-gradient(135deg, #f97316, #ec4899);
+    color: #ffffff;
+    border-color: transparent;
+}
+
+/* Footer sáng */
+#footer {
+    border-top: 1px solid rgba(209, 213, 219, 0.9);
+    background: #f9fafb;
+    color: #6b7280;
+}

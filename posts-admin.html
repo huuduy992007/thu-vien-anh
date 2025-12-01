@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Admin - Quản lý bài viết</title>
+    <!-- dùng lại css admin -->
+    <link rel="stylesheet" href="./assets/css/posts-admin.css">
+</head>
+
+<body class="admin-page">
+
+    <div class="admin-wrap">
+        <header class="admin-header">
+            <h1>Admin - Quản lý bài viết</h1>
+            <div class="admin-actions">
+                <button id="btnBackUsers">← Quay lại quản lý người dùng</button>
+            </div>
+        </header>
+
+        <main class="admin-main">
+            <!-- FORM TẠO / SỬA BÀI VIẾT -->
+            <section class="admin-section">
+                <h2>Thêm bài viết mới</h2>
+                <form id="postForm">
+                    <div class="form-row">
+                        <label for="title">Tiêu đề</label>
+                        <input type="text" id="title" required>
+                    </div>
+
+                    <div class="form-row">
+                        <label for="thumbnail">Ảnh thumbnail (URL)</label>
+                        <input type="url" id="thumbnail" required>
+                    </div>
+
+                    <div class="form-row">
+                        <label for="excerpt">Trích dẫn ngắn</label>
+                        <textarea id="excerpt" rows="2" required></textarea>
+                    </div>
+
+                    <div class="form-row">
+                        <label for="content">Nội dung chi tiết</label>
+                        <textarea id="content" rows="4" required></textarea>
+                    </div>
+
+                    <div class="form-row">
+                        <label for="status">Trạng thái</label>
+                        <select id="status">
+                            <option value="pending">Chờ duyệt</option>
+                            <option value="approved" selected>Đã duyệt</option>
+                            <option value="hidden">Ẩn</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" id="btnSavePost">Lưu bài viết</button>
+                </form>
+            </section>
+
+            <!-- BẢNG DANH SÁCH BÀI VIẾT -->
+            <section class="admin-section">
+                <h2>Danh sách bài viết</h2>
+                <table id="postsTable">
+                    <thead>
+                        <tr>
+                            <th>Tiêu đề</th>
+                            <th>Trạng thái</th>
+                            <th>Ngày tạo</th>
+                            <th>Hành động</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- JS render -->
+                    </tbody>
+                </table>
+            </section>
+        </main>
+    </div>
+
+    <script src="posts-admin.js"></script>
+</body>
+
+</html>

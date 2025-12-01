@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nhóm 7 - Thư Viện Ảnh</title>
+    <link rel="stylesheet" href="./assets/css/index.css">
+    <script defer src="./main.js"></script>
+    <script defer src="gallery.js"></script>
+</head>
+
+<body>
+    <header id="header">
+        <nav id="nav-bar">
+            <ul id="menu-left">
+                <li><a href="index.html">Trang Chủ</a></li>
+                <li><a href="#">Thư Viện Ảnh</a></li>
+                <!-- ĐỔI href THÀNH #blog-section -->
+                <li><a href="#blog-section">Blog Kỹ Thuật Chụp Ảnh</a></li>
+                <li><a href="#">Giới Thiệu</a></li>
+                <li><a href="#">Liên Hệ</a></li>
+                <li class="dropdown">
+                    <a href="#">Thêm ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Giao Diện</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Thông Báo</a></li>
+                        <li><a href="#">Ngôn Ngữ</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+            <ul id="menu-right">
+                <li id="login-item"><a href="login.html">Đăng Nhập</a></li>
+                <li id="register-item"><a href="register.html">Đăng Ký</a></li>
+                <li id="user-greeting" style="display:none;">
+                    <a href="user-info.html" id="greeting-link">Xin chào</a>
+                </li>
+                <li id="admin-panel-item" style="display:none;"><a href="admin.html">Admin Panel</a></li>
+                <li id="logout-item" style="display:none;"><a href="#" id="logout-btn">Đăng Xuất</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main id="content">
+        <h1 style="text-align:center; margin-top:100px;">Chào mừng bạn đến với Thư Viện Ảnh</h1>
+
+        <!-- SLIDER 3 ẢNH (TỰ ĐỘNG + ĐIỀU HƯỚNG TAY) -->
+        <section class="hero-slider-wrapper">
+            <div class="slider" id="hero-slider">
+                <div class="slides">
+                    <div class="slide">
+                        <img src="https://hoinhabaobacgiang.vn/Includes/NewsImg/1_2024/29736_7-1-1626444923.jpg"
+                            alt="Ảnh slider 1">
+                    </div>
+                    <div class="slide">
+                        <img src="https://images.pexels.com/photos/417074/pexels-photo-417074.jpeg" alt="Ảnh slider 2">
+                    </div>
+                    <div class="slide">
+                        <img src="https://images.pexels.com/photos/457882/pexels-photo-457882.jpeg" alt="Ảnh slider 3">
+                    </div>
+                </div>
+
+                <!-- Nút điều hướng -->
+                <button class="slider-btn prev" aria-label="Ảnh trước">&#10094;</button>
+                <button class="slider-btn next" aria-label="Ảnh sau">&#10095;</button>
+
+                <!-- Dots -->
+                <div class="slider-dots">
+                    <span class="dot active" data-index="0"></span>
+                    <span class="dot" data-index="1"></span>
+                    <span class="dot" data-index="2"></span>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDER NGANG / CAROUSEL ALBUM MỚI -->
+        <section class="carousel-section">
+            <h2>Album mới</h2>
+            <div class="carousel" id="photo-carousel">
+                <button class="carousel-btn prev" aria-label="Trước">‹</button>
+
+                <div class="carousel-track-container">
+                    <div class="carousel-track">
+                        <!-- JS trong gallery.js sẽ render các album vào đây -->
+                    </div>
+                </div>
+
+                <button class="carousel-btn next" aria-label="Sau">›</button>
+            </div>
+        </section>
+
+        <!-- BLOG KỸ THUẬT CHỤP ẢNH -->
+        <section class="blog-section" id="blog-section">
+            <h2>Blog kỹ thuật chụp ảnh</h2>
+            <div class="blog-list" id="blog-list">
+                <!-- JS sẽ render các bài blog vào đây -->
+            </div>
+        </section>
+
+    </main>
+
+    <footer id="footer">
+        <p>© 2025 Nhóm 7 - Bài Kiểm Tra Kết Thúc Môn.</p>
+    </footer>
+
+
+
+    <!-- CHATBOT WIDGET -->
+    <div class="chatbot-widget" id="chatbot-widget">
+        <!-- Nút tròn mở/đóng -->
+        <button class="chatbot-toggle" id="chatbot-toggle" aria-label="Mở chat">
+            💬
+        </button>
+
+        <!-- Cửa sổ chat -->
+        <div class="chatbot-window" id="chatbot-window">
+            <div class="chatbot-header">
+                <div class="chatbot-avatar">📷</div>
+                <div class="chatbot-info">
+                    <div class="chatbot-title">PhotoBot</div>
+                    <div class="chatbot-subtitle">Bot hỗ trợ Thư Viện Ảnh</div>
+                </div>
+                <button class="chatbot-close" id="chatbot-close">✕</button>
+            </div>
+
+            <div class="chatbot-messages" id="chatbot-messages">
+                <!-- Tin nhắn sẽ được JS thêm vào -->
+            </div>
+
+            <form class="chatbot-input-area" id="chatbot-form">
+                <input type="text" id="chatbot-input" autocomplete="off"
+                    placeholder="Nhập câu hỏi về thư viện ảnh..." />
+                <button type="submit">Gửi</button>
+            </form>
+        </div>
+    </div>
+    <!-- END CHATBOT WIDGET -->
+</body>
+
+</html>

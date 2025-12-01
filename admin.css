@@ -1,0 +1,588 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.admin-page {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a0a2e 50%, #16213e 100%);
+    color: #ffffff;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Hiệu ứng nền động */
+.admin-page::before {
+    content: '';
+    position: fixed;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at 20% 50%, rgba(120, 0, 255, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(0, 150, 255, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 40% 20%, rgba(255, 0, 150, 0.06) 0%, transparent 50%);
+    animation: floatBg 25s ease-in-out infinite;
+    z-index: 0;
+}
+
+@keyframes floatBg {
+
+    0%,
+    100% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+
+    33% {
+        transform: translate(40px, -40px) rotate(120deg);
+    }
+
+    66% {
+        transform: translate(-30px, 30px) rotate(240deg);
+    }
+}
+
+/* Wrapper */
+.admin-wrap {
+    position: relative;
+    z-index: 1;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 30px 20px;
+    animation: fadeIn 0.8s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Header */
+.admin-header {
+    background: rgba(20, 20, 40, 0.7);
+    backdrop-filter: blur(20px);
+    padding: 30px 40px;
+    border-radius: 20px;
+    margin-bottom: 30px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5),
+        0 0 60px rgba(120, 0, 255, 0.15),
+        inset 0 0 40px rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+}
+
+.admin-header::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg,
+            rgba(120, 0, 255, 0.3),
+            rgba(0, 150, 255, 0.3),
+            rgba(255, 0, 150, 0.3));
+    border-radius: 20px;
+    z-index: -1;
+    filter: blur(15px);
+    opacity: 0.4;
+    animation: headerGlow 4s ease-in-out infinite;
+}
+
+@keyframes headerGlow {
+
+    0%,
+    100% {
+        opacity: 0.4;
+    }
+
+    50% {
+        opacity: 0.7;
+    }
+}
+
+.admin-header h1 {
+    font-size: 32px;
+    font-weight: 300;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 25px;
+    text-shadow: 0 0 20px rgba(120, 0, 255, 0.6),
+        0 0 40px rgba(0, 150, 255, 0.4);
+    animation: textPulse 3s ease-in-out infinite;
+}
+
+@keyframes textPulse {
+
+    0%,
+    100% {
+        text-shadow: 0 0 20px rgba(120, 0, 255, 0.6), 0 0 40px rgba(0, 150, 255, 0.4);
+    }
+
+    50% {
+        text-shadow: 0 0 30px rgba(120, 0, 255, 0.9), 0 0 60px rgba(0, 150, 255, 0.6);
+    }
+}
+
+/* Admin Actions */
+.admin-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+}
+
+.admin-actions input[type="text"] {
+    flex: 1;
+    min-width: 250px;
+    padding: 12px 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    color: #ffffff;
+    font-size: 14px;
+    outline: none;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.admin-actions input[type="text"]::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.admin-actions input[type="text"]:focus {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(120, 0, 255, 0.6);
+    box-shadow: 0 0 15px rgba(120, 0, 255, 0.3);
+}
+
+.admin-actions button,
+.admin-actions .btn {
+    padding: 12px 24px;
+    background: linear-gradient(135deg, rgba(120, 0, 255, 0.3) 0%, rgba(0, 150, 255, 0.3) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    backdrop-filter: blur(10px);
+    position: relative;
+    overflow: hidden;
+}
+
+.admin-actions button::before,
+.admin-actions .btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.admin-actions button:hover::before,
+.admin-actions .btn:hover::before {
+    left: 100%;
+}
+
+.admin-actions button:hover,
+.admin-actions .btn:hover {
+    background: linear-gradient(135deg, rgba(120, 0, 255, 0.5) 0%, rgba(0, 150, 255, 0.5) 100%);
+    box-shadow: 0 5px 25px rgba(120, 0, 255, 0.4);
+    transform: translateY(-2px);
+}
+
+#btnClearAll {
+    background: linear-gradient(135deg, rgba(255, 0, 100, 0.3) 0%, rgba(255, 50, 50, 0.3) 100%);
+}
+
+#btnClearAll:hover {
+    background: linear-gradient(135deg, rgba(255, 0, 100, 0.5) 0%, rgba(255, 50, 50, 0.5) 100%);
+    box-shadow: 0 5px 25px rgba(255, 0, 100, 0.4);
+}
+
+.manage-posts-btn,
+.manage-album-btn {
+    background: linear-gradient(135deg, rgba(0, 200, 150, 0.3) 0%, rgba(0, 150, 255, 0.3) 100%);
+}
+
+.manage-posts-btn:hover,
+.manage-album-btn:hover {
+    background: linear-gradient(135deg, rgba(0, 200, 150, 0.5) 0%, rgba(0, 150, 255, 0.5) 100%);
+    box-shadow: 0 5px 25px rgba(0, 200, 150, 0.4);
+}
+
+/* Main Content */
+.admin-main {
+    background: rgba(20, 20, 40, 0.7);
+    backdrop-filter: blur(20px);
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5),
+        0 0 60px rgba(120, 0, 255, 0.15),
+        inset 0 0 40px rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    overflow-x: auto;
+}
+
+/* Table */
+#usersTable {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 10px;
+}
+
+#usersTable thead tr {
+    background: rgba(120, 0, 255, 0.2);
+    backdrop-filter: blur(10px);
+}
+
+#usersTable thead th {
+    padding: 18px 15px;
+    text-align: left;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    text-shadow: 0 0 10px rgba(120, 0, 255, 0.5);
+}
+
+#usersTable thead th:first-child {
+    border-radius: 10px 0 0 10px;
+}
+
+#usersTable thead th:last-child {
+    border-radius: 0 10px 10px 0;
+}
+
+#usersTable tbody tr {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+#usersTable tbody tr:hover {
+    background: rgba(120, 0, 255, 0.1);
+    box-shadow: 0 5px 20px rgba(120, 0, 255, 0.2);
+    transform: translateX(5px);
+}
+
+#usersTable tbody td {
+    padding: 15px;
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 14px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+#usersTable tbody td:first-child {
+    border-left: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 10px 0 0 10px;
+    font-weight: 600;
+    color: rgba(120, 0, 255, 0.9);
+}
+
+#usersTable tbody td:last-child {
+    border-right: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 0 10px 10px 0;
+}
+
+/* Buttons trong table */
+#usersTable tbody button {
+    padding: 8px 16px;
+    margin: 0 5px;
+    background: linear-gradient(135deg, rgba(120, 0, 255, 0.3) 0%, rgba(0, 150, 255, 0.3) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    color: #ffffff;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
+}
+
+#usersTable tbody button:hover {
+    background: linear-gradient(135deg, rgba(120, 0, 255, 0.5) 0%, rgba(0, 150, 255, 0.5) 100%);
+    box-shadow: 0 3px 15px rgba(120, 0, 255, 0.4);
+    transform: translateY(-2px);
+}
+
+#usersTable tbody button.delete-btn {
+    background: linear-gradient(135deg, rgba(255, 0, 100, 0.3) 0%, rgba(255, 50, 50, 0.3) 100%);
+}
+
+#usersTable tbody button.delete-btn:hover {
+    background: linear-gradient(135deg, rgba(255, 0, 100, 0.5) 0%, rgba(255, 50, 50, 0.5) 100%);
+    box-shadow: 0 3px 15px rgba(255, 0, 100, 0.4);
+}
+
+/* Role badge */
+#usersTable tbody td:nth-child(4) {
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .admin-header {
+        padding: 25px 30px;
+    }
+
+    .admin-header h1 {
+        font-size: 26px;
+        margin-bottom: 20px;
+    }
+
+    .admin-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .admin-actions input[type="text"] {
+        min-width: 100%;
+    }
+
+    .admin-actions button,
+    .admin-actions .btn {
+        width: 100%;
+        text-align: center;
+    }
+
+    .admin-main {
+        padding: 20px;
+        overflow-x: scroll;
+    }
+
+    #usersTable {
+        min-width: 800px;
+    }
+}
+
+@media (max-width: 768px) {
+    .admin-wrap {
+        padding: 20px 15px;
+    }
+
+    .admin-header {
+        padding: 20px 20px;
+    }
+
+    .admin-header h1 {
+        font-size: 22px;
+    }
+
+    .admin-main {
+        padding: 15px;
+    }
+
+    #usersTable thead th,
+    #usersTable tbody td {
+        padding: 12px 10px;
+        font-size: 13px;
+    }
+
+    #usersTable tbody button {
+        padding: 6px 12px;
+        font-size: 12px;
+        margin: 2px;
+    }
+}
+
+/* Scrollbar custom */
+.admin-main::-webkit-scrollbar {
+    height: 8px;
+}
+
+.admin-main::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+}
+
+.admin-main::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, rgba(120, 0, 255, 0.5), rgba(0, 150, 255, 0.5));
+    border-radius: 10px;
+}
+
+.admin-main::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, rgba(120, 0, 255, 0.7), rgba(0, 150, 255, 0.7));
+}
+
+
+
+
+
+
+/* SỬA SANG TÔNG SÁNG */
+/* ================= THEME SÁNG CHO ADMIN ================= */
+
+.admin-page {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    min-height: 100vh;
+    background:
+        radial-gradient(circle at 0 0, rgba(96, 165, 250, 0.35), transparent 60%),
+        radial-gradient(circle at 100% 100%, rgba(244, 114, 182, 0.25), transparent 60%),
+        linear-gradient(180deg, #f9fafb, #eef2ff 40%, #fef3c7 100%);
+    color: #111827;
+}
+
+/* Header sáng hơn */
+.admin-header {
+    background: rgba(255, 255, 255, 0.96);
+    backdrop-filter: blur(16px);
+    padding: 24px 32px;
+    border-radius: 20px;
+    margin-bottom: 24px;
+    box-shadow: 0 10px 30px rgba(148, 163, 184, 0.55);
+    border: 1px solid rgba(209, 213, 219, 0.9);
+}
+
+.admin-header::before {
+    display: none;
+    /* bỏ glow tím đậm cũ */
+}
+
+.admin-header h1 {
+    font-size: 28px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+    color: #111827;
+    text-shadow: none;
+}
+
+/* Ô tìm kiếm + nút hành động */
+.admin-actions input[type="text"] {
+    background: #ffffff;
+    border: 1px solid rgba(209, 213, 219, 0.9);
+    color: #111827;
+    box-shadow: 0 4px 14px rgba(148, 163, 184, 0.45);
+}
+
+.admin-actions input[type="text"]::placeholder {
+    color: #9ca3af;
+}
+
+.admin-actions button,
+.admin-actions .btn {
+    background: linear-gradient(135deg, #f97316 0%, #ec4899 100%);
+    border: none;
+    color: #ffffff;
+    box-shadow: 0 8px 24px rgba(248, 113, 113, 0.6);
+}
+
+.admin-actions button:hover,
+.admin-actions .btn:hover {
+    background: linear-gradient(135deg, #fb923c 0%, #f472b6 100%);
+    box-shadow: 0 10px 30px rgba(248, 113, 113, 0.8);
+    transform: translateY(-1px);
+}
+
+/* nút xóa all đỏ hơn 1 chút */
+#btnClearAll {
+    background: linear-gradient(135deg, #f97316 0%, #ef4444 100%);
+}
+
+/* Body main sáng */
+.admin-main {
+    background: #ffffff;
+    backdrop-filter: blur(0);
+    padding: 24px;
+    border-radius: 20px;
+    box-shadow: 0 16px 40px rgba(148, 163, 184, 0.55);
+    border: 1px solid rgba(209, 213, 219, 0.9);
+}
+
+/* Bảng user sáng màu */
+#usersTable {
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+
+#usersTable thead tr {
+    background: #e5edff;
+}
+
+#usersTable thead th {
+    color: #1f2937;
+    border: 1px solid rgba(209, 213, 219, 0.9);
+    text-shadow: none;
+}
+
+#usersTable tbody tr {
+    background: #ffffff;
+    border: none;
+    transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
+}
+
+#usersTable tbody tr:nth-child(odd) {
+    background: #f9fafb;
+}
+
+#usersTable tbody tr:hover {
+    background: #fff7ed;
+    /* cam nhạt */
+    box-shadow: 0 8px 20px rgba(248, 181, 129, 0.45);
+    transform: translateX(4px);
+}
+
+#usersTable tbody td {
+    color: #111827;
+    border-top: 1px solid rgba(229, 231, 235, 0.9);
+    border-bottom: 1px solid rgba(229, 231, 235, 0.9);
+}
+
+#usersTable tbody td:first-child {
+    color: #f97316;
+    font-weight: 600;
+    border-left: 1px solid rgba(229, 231, 235, 0.9);
+}
+
+#usersTable tbody td:last-child {
+    border-right: 1px solid rgba(229, 231, 235, 0.9);
+}
+
+/* Nút trong bảng */
+#usersTable tbody button {
+    background: linear-gradient(135deg, #3b82f6 0%, #22c55e 100%);
+    border: none;
+    color: #ffffff;
+    box-shadow: 0 4px 14px rgba(59, 130, 246, 0.5);
+}
+
+#usersTable tbody button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 7px 20px rgba(59, 130, 246, 0.7);
+}
+
+/* nút delete */
+#usersTable tbody button.delete-btn {
+    background: linear-gradient(135deg, #f97316 0%, #ef4444 100%);
+}
+
+#usersTable tbody button.delete-btn:hover {
+    box-shadow: 0 7px 20px rgba(239, 68, 68, 0.7);
+}
+
+/* role badge */
+#usersTable tbody td:nth-child(4) {
+    color: #9333ea;
+}

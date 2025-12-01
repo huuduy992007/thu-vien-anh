@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Admin - Quản lý người dùng</title>
+    <link rel="stylesheet" href="./assets/css/admin.css">
+</head>
+
+<body class="admin-page">
+
+    <div class="admin-wrap">
+        <header class="admin-header">
+            <h1>Admin - Quản lý người dùng</h1>
+            <div class="admin-actions">
+                <input type="text" id="searchInput" placeholder="Tìm theo tên hoặc email">
+                <button id="btnRefresh">Làm mới</button>
+                <button id="btnExport">Xuất JSON</button>
+                <button id="btnClearAll">Xóa tất cả (trừ Admin)</button>
+
+
+                <a href="posts-admin.html" class="btn manage-posts-btn">
+                    Quản lý bài viết
+                </a>
+
+
+                <a href="media-admin.html" class="btn manage-album-btn">
+                    Quản lý Album & Ảnh
+                </a>
+
+                <a href="index.html" class="btn">Về trang chính</a>
+            </div>
+
+        </header>
+
+        <main class="admin-main">
+            <table id="usersTable">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Họ & tên</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                        <th>Ngày tạo</th>
+                        <th>Hành động</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </main>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+
+</html>

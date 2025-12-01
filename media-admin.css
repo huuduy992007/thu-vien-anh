@@ -1,0 +1,780 @@
+/* =============== RESET NHẸ =============== */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg-main: #050616;
+    --bg-secondary: rgba(11, 14, 40, 0.85);
+    --glass: rgba(15, 20, 60, 0.75);
+    --border-glass: rgba(255, 255, 255, 0.06);
+
+    --accent-1: #7f5af0;
+    --accent-2: #2cb67d;
+    --accent-soft: rgba(127, 90, 240, 0.2);
+
+    --text-main: #f9f9ff;
+    --text-sub: #b0b3c7;
+    --text-muted: #7b7f97;
+
+    --danger: #f25f5c;
+    --shadow-soft: 0 20px 60px rgba(0, 0, 0, 0.7);
+    --radius-xl: 18px;
+    --radius-lg: 14px;
+    --radius-md: 10px;
+
+    --transition-fast: 0.18s ease-out;
+    --transition-normal: 0.28s ease;
+}
+
+html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", Roboto, sans-serif;
+}
+
+/* =============== NỀN TỐI HUYỀN BÍ =============== */
+body.admin-page {
+    min-height: 100vh;
+    color: var(--text-main);
+    background:
+        radial-gradient(circle at 10% 0%, rgba(127, 90, 240, 0.25), transparent 55%),
+        radial-gradient(circle at 90% 100%, rgba(44, 182, 125, 0.18), transparent 55%),
+        radial-gradient(circle at 0% 100%, rgba(242, 95, 92, 0.1), transparent 50%),
+        linear-gradient(135deg, #020617, #020617, #050816 40%, #020617 70%, #050816 100%);
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    padding: 24px;
+    position: relative;
+    overflow-x: hidden;
+}
+
+body.admin-page::before,
+body.admin-page::after {
+    content: "";
+    position: fixed;
+    inset: -10%;
+    background:
+        radial-gradient(circle at 20% 30%, rgba(127, 90, 240, 0.13), transparent 60%),
+        radial-gradient(circle at 80% 70%, rgba(44, 182, 125, 0.14), transparent 60%);
+    mix-blend-mode: screen;
+    opacity: 0.9;
+    z-index: -2;
+}
+
+body.admin-page::after {
+    backdrop-filter: blur(40px);
+    -webkit-backdrop-filter: blur(40px);
+    opacity: 0.35;
+}
+
+/* =============== KHUNG CHÍNH =============== */
+.admin-wrap {
+    width: 100%;
+    max-width: 1120px;
+    background: linear-gradient(135deg, rgba(9, 9, 30, 0.96), rgba(7, 9, 26, 0.98));
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    box-shadow: var(--shadow-soft);
+    padding: 22px 22px 28px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* viền glow */
+.admin-wrap::before {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    border-radius: inherit;
+    background: conic-gradient(from 180deg,
+            rgba(127, 90, 240, 0.35),
+            rgba(44, 182, 125, 0.25),
+            rgba(242, 95, 92, 0.25),
+            rgba(127, 90, 240, 0.35));
+    mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    mask-composite: exclude;
+    -webkit-mask-composite: xor;
+    padding: 1px;
+    opacity: 0.7;
+    filter: blur(0.5px);
+    pointer-events: none;
+    animation: borderPulse 10s linear infinite;
+}
+
+@keyframes borderPulse {
+    0% {
+        opacity: 0.3;
+        transform: rotate(0deg);
+    }
+
+    50% {
+        opacity: 0.8;
+    }
+
+    100% {
+        opacity: 0.3;
+        transform: rotate(360deg);
+    }
+}
+
+/* noise nhẹ */
+.admin-wrap::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    opacity: 0.33;
+    mix-blend-mode: soft-light;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='2.4' numOctaves='3' stitchTiles='noStitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.45'/%3E%3C/svg%3E");
+    pointer-events: none;
+}
+
+/* =============== HEADER =============== */
+.admin-header {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 14px 18px 18px;
+    margin-bottom: 12px;
+    border-radius: 18px;
+    background: radial-gradient(circle at top left, rgba(127, 90, 240, 0.25), transparent 55%),
+        radial-gradient(circle at bottom right, rgba(44, 182, 125, 0.2), transparent 55%),
+        var(--glass);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.55);
+}
+
+.admin-header h1 {
+    font-size: 1.3rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--text-main);
+    text-shadow: 0 0 18px rgba(127, 90, 240, 0.7);
+}
+
+/* =============== BUTTON CHUNG =============== */
+.admin-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+button {
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font: 500 0.9rem system-ui, sans-serif;
+    border-radius: 999px;
+    padding: 9px 16px;
+    letter-spacing: 0.02em;
+    transition: transform var(--transition-fast),
+        box-shadow var(--transition-fast),
+        background var(--transition-fast),
+        color var(--transition-fast),
+        border-color var(--transition-fast),
+        opacity var(--transition-fast);
+}
+
+/* nút back trang chính */
+#btnBackHome {
+    background: radial-gradient(circle at 0% 50%, rgba(127, 90, 240, 0.35), transparent 60%),
+        linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(17, 24, 39, 0.95));
+    color: var(--text-main);
+    border: 1px solid rgba(127, 90, 240, 0.6);
+    box-shadow: 0 0 0 1px rgba(127, 90, 240, 0.2), 0 12px 30px rgba(0, 0, 0, 0.7);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+#btnBackHome::before {
+    content: "◂";
+    font-size: 0.9rem;
+    opacity: 0.9;
+    transform: translateX(-1px);
+    transition: transform var(--transition-fast), opacity var(--transition-fast);
+}
+
+#btnBackHome:hover {
+    transform: translateY(-1px) translateX(-1px);
+    box-shadow: 0 0 22px rgba(127, 90, 240, 0.6), 0 14px 35px rgba(0, 0, 0, 0.85);
+    background: radial-gradient(circle at 0% 50%, rgba(127, 90, 240, 0.5), transparent 60%),
+        linear-gradient(135deg, rgba(30, 64, 175, 0.98), rgba(17, 24, 39, 1));
+}
+
+#btnBackHome:hover::before {
+    transform: translateX(-4px);
+    opacity: 1;
+}
+
+#btnBackHome:active {
+    transform: translateY(0) translateX(0);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.9);
+}
+
+/* nút LƯU album / THÊM ảnh */
+#btnSaveAlbum,
+#btnSaveMedia {
+    margin-top: 8px;
+    width: 100%;
+    background: radial-gradient(circle at 20% 0%, rgba(44, 182, 125, 0.25), transparent 55%),
+        linear-gradient(135deg, #22c55e, #16a34a);
+    color: #020617;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    border-radius: 999px;
+    box-shadow: 0 14px 32px rgba(22, 163, 74, 0.65);
+    position: relative;
+    overflow: hidden;
+}
+
+#btnSaveAlbum::after,
+#btnSaveMedia::after {
+    content: "";
+    position: absolute;
+    top: -100%;
+    left: -40%;
+    width: 40%;
+    height: 300%;
+    transform: rotate(25deg);
+    background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.8), transparent);
+    opacity: 0;
+    pointer-events: none;
+}
+
+#btnSaveAlbum:hover,
+#btnSaveMedia:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 18px 40px rgba(22, 163, 74, 0.8);
+}
+
+#btnSaveAlbum:hover::after,
+#btnSaveMedia:hover::after {
+    opacity: 0.9;
+    animation: shine 0.9s forwards;
+}
+
+#btnSaveAlbum:active,
+#btnSaveMedia:active {
+    transform: translateY(0);
+    box-shadow: 0 8px 22px rgba(22, 163, 74, 0.9);
+}
+
+@keyframes shine {
+    0% {
+        transform: translateX(-120%) rotate(25deg);
+    }
+
+    100% {
+        transform: translateX(260%) rotate(25deg);
+    }
+}
+
+/* =============== MAIN LAYOUT =============== */
+.admin-main {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr);
+    gap: 18px;
+    margin-top: 4px;
+}
+
+/* =============== SECTION =============== */
+.admin-section {
+    background: radial-gradient(circle at 10% 0%, rgba(127, 90, 240, 0.22), transparent 65%),
+        radial-gradient(circle at 100% 100%, rgba(44, 182, 125, 0.16), transparent 65%),
+        var(--bg-secondary);
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--border-glass);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.75);
+    padding: 18px 18px 20px;
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    position: relative;
+    overflow: hidden;
+}
+
+.admin-section::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(135deg, rgba(127, 90, 240, 0.3), rgba(44, 182, 125, 0.28));
+    opacity: 0;
+    pointer-events: none;
+    mix-blend-mode: screen;
+    transition: opacity 0.6s ease-out;
+}
+
+.admin-section:hover::before {
+    opacity: 0.08;
+}
+
+.admin-section h2 {
+    font-size: 1.05rem;
+    margin-bottom: 12px;
+    color: var(--text-main);
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    position: relative;
+}
+
+.admin-section h2::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 58px;
+    height: 2px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+    box-shadow: 0 0 8px rgba(127, 90, 240, 0.8);
+}
+
+/* =============== FORM =============== */
+form {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.form-row {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.form-row label {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-sub);
+}
+
+/* input / textarea / select */
+input[type="text"],
+input[type="url"],
+textarea,
+select {
+    background: radial-gradient(circle at 0 0, rgba(127, 90, 240, 0.1), transparent 55%),
+        linear-gradient(135deg, rgba(15, 23, 42, 0.96), rgba(15, 23, 42, 0.98));
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(148, 163, 184, 0.35);
+    padding: 8px 11px;
+    color: var(--text-main);
+    font-size: 0.9rem;
+    outline: none;
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.85);
+    transition: border-color var(--transition-normal),
+        box-shadow var(--transition-normal),
+        background var(--transition-normal),
+        transform var(--transition-fast);
+    resize: vertical;
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: var(--text-muted);
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    border-color: rgba(127, 90, 240, 0.8);
+    box-shadow:
+        0 0 0 1px rgba(127, 90, 240, 0.75),
+        0 0 24px rgba(127, 90, 240, 0.75);
+    transform: translateY(-1px);
+    background: radial-gradient(circle at 0 0, rgba(127, 90, 240, 0.16), transparent 55%),
+        linear-gradient(135deg, rgba(15, 23, 42, 1), rgba(15, 23, 42, 1));
+}
+
+/* select arrow */
+select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image:
+        linear-gradient(45deg, transparent 50%, var(--accent-1) 50%),
+        linear-gradient(135deg, var(--accent-1) 50%, transparent 50%),
+        linear-gradient(to right, rgba(148, 163, 184, 0.3), rgba(148, 163, 184, 0.05));
+    background-position:
+        calc(100% - 16px) calc(50% - 3px),
+        calc(100% - 11px) calc(50% - 3px),
+        calc(100% - 36px) 50%;
+    background-size:
+        7px 7px,
+        7px 7px,
+        26px 70%;
+    background-repeat: no-repeat;
+    padding-right: 42px;
+}
+
+/* đảm bảo chữ luôn hiện trong select ở bảng */
+#albumsTable select,
+#mediaAlbum {
+    color: #ffffff !important;
+    text-shadow: none !important;
+}
+
+#albumsTable select option,
+#mediaAlbum option {
+    color: #ffffff;
+    background-color: #020617;
+}
+
+/* =============== TABLE ALBUM & MEDIA =============== */
+#albumsTable,
+#mediaTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 14px;
+    font-size: 0.88rem;
+    color: var(--text-main);
+    border-radius: 14px;
+    overflow: hidden;
+    background: linear-gradient(145deg, rgba(15, 23, 42, 0.88), rgba(15, 23, 42, 0.96));
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.75);
+}
+
+#albumsTable thead,
+#mediaTable thead {
+    background: radial-gradient(circle at 20% 0, rgba(127, 90, 240, 0.3), transparent 60%),
+        linear-gradient(135deg, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 1));
+}
+
+#albumsTable th,
+#albumsTable td,
+#mediaTable th,
+#mediaTable td {
+    padding: 9px 10px;
+    text-align: left;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.18);
+}
+
+#albumsTable th,
+#mediaTable th {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--text-sub);
+}
+
+#albumsTable tbody tr,
+#mediaTable tbody tr {
+    position: relative;
+    transition: background 0.25s ease, transform 0.18s ease, box-shadow 0.25s ease;
+}
+
+#albumsTable tbody tr::before,
+#mediaTable tbody tr::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgba(127, 90, 240, 0.25), rgba(44, 182, 125, 0.18));
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+}
+
+#albumsTable tbody tr:hover,
+#mediaTable tbody tr:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.9);
+    background: radial-gradient(circle at 0 0, rgba(127, 90, 240, 0.17), transparent 60%),
+        linear-gradient(135deg, rgba(15, 23, 42, 1), rgba(15, 23, 42, 1));
+}
+
+#albumsTable tbody tr:hover::before,
+#mediaTable tbody tr:hover::before {
+    opacity: 0.12;
+}
+
+/* cột hành động */
+#albumsTable td:last-child,
+#mediaTable td:last-child {
+    white-space: nowrap;
+}
+
+/* nút Xóa trong bảng */
+.table-btn,
+#albumsTable button,
+#mediaTable button {
+    border-radius: 999px;
+    padding: 4px 12px;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    border: 1px solid rgba(248, 113, 113, 0.85);
+    background: linear-gradient(135deg, rgba(30, 64, 175, 0.9), rgba(15, 23, 42, 1));
+    color: #fecaca;
+}
+
+.table-btn:hover,
+#albumsTable button:hover,
+#mediaTable button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.85);
+}
+
+/* ảnh thumbnail nhỏ trong bảng media (nếu bạn render) */
+#mediaTable img {
+    width: 64px;
+    height: 48px;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.8);
+}
+
+/* =============== SCROLLBAR =============== */
+.admin-section::-webkit-scrollbar,
+body::-webkit-scrollbar {
+    width: 8px;
+}
+
+.admin-section::-webkit-scrollbar-track,
+body::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.admin-section::-webkit-scrollbar-thumb,
+body::-webkit-scrollbar-thumb {
+    background: rgba(148, 163, 184, 0.45);
+    border-radius: 999px;
+}
+
+/* =============== RESPONSIVE =============== */
+@media (max-width: 960px) {
+    body.admin-page {
+        padding: 16px;
+    }
+
+    .admin-wrap {
+        padding: 18px 15px 22px;
+    }
+
+    .admin-main {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+@media (max-width: 640px) {
+    .admin-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .admin-header h1 {
+        font-size: 1.1rem;
+    }
+
+    #albumsTable th,
+    #albumsTable td,
+    #mediaTable th,
+    #mediaTable td {
+        padding: 7px 8px;
+    }
+
+    #btnBackHome {
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+    }
+}
+
+
+/* CHỈNH SANG TÔNG SÁNG */
+/* ================= THEME SÁNG MEDIA ADMIN ================= */
+
+:root {
+    --bg-main: #f3f4ff;
+    --bg-secondary: rgba(255, 255, 255, 0.96);
+    --glass: rgba(255, 255, 255, 0.96);
+    --border-glass: rgba(209, 213, 219, 0.9);
+
+    --accent-1: #f97316;
+    --accent-2: #ec4899;
+    --accent-soft: rgba(249, 115, 22, 0.16);
+
+    --text-main: #111827;
+    --text-sub: #4b5563;
+    --text-muted: #9ca3af;
+
+    --danger: #ef4444;
+    --shadow-soft: 0 18px 40px rgba(148, 163, 184, 0.65);
+}
+
+body.admin-page {
+    min-height: 100vh;
+    color: var(--text-main);
+    background:
+        radial-gradient(circle at 0 0, rgba(96, 165, 250, 0.35), transparent 60%),
+        radial-gradient(circle at 100% 100%, rgba(244, 114, 182, 0.3), transparent 60%),
+        linear-gradient(180deg, #f9fafb, #eef2ff 40%, #fef3c7 100%);
+    padding: 24px;
+}
+
+/* khung chính trắng */
+.admin-wrap {
+    background: #ffffff;
+    border-radius: 24px;
+    border: 1px solid rgba(209, 213, 219, 0.9);
+    box-shadow: var(--shadow-soft);
+}
+
+.admin-wrap::before {
+    display: none;
+    /* bỏ viền glow mạnh */
+}
+
+/* header */
+.admin-header {
+    background: rgba(255, 255, 255, 0.96);
+    border-radius: 18px;
+    border: 1px solid rgba(209, 213, 219, 0.9);
+    box-shadow: 0 10px 26px rgba(148, 163, 184, 0.6);
+}
+
+.admin-header h1 {
+    color: #111827;
+    text-shadow: none;
+}
+
+/* nút back */
+#btnBackHome {
+    background: #ffffff;
+    color: #111827;
+    border: 1px solid rgba(156, 163, 175, 0.9);
+    box-shadow: 0 6px 16px rgba(148, 163, 184, 0.7);
+}
+
+#btnBackHome:hover {
+    background: linear-gradient(135deg, #f97316, #ec4899);
+    color: #ffffff;
+}
+
+/* section trắng */
+.admin-section {
+    background: #ffffff;
+    border-radius: 18px;
+    border: 1px solid rgba(209, 213, 219, 0.9);
+    box-shadow: 0 12px 30px rgba(148, 163, 184, 0.6);
+}
+
+.admin-section::before {
+    display: none;
+}
+
+.admin-section h2 {
+    color: #111827;
+}
+
+.admin-section h2::after {
+    background: linear-gradient(90deg, #f97316, #ec4899);
+    box-shadow: 0 0 8px rgba(249, 115, 22, 0.7);
+}
+
+/* input / textarea / select sáng */
+input[type="text"],
+input[type="url"],
+textarea,
+select {
+    background: #f9fafb;
+    border: 1px solid rgba(209, 213, 219, 0.9);
+    color: #111827;
+    box-shadow: none;
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: var(--text-muted);
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    background: #ffffff;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 1px rgba(59, 130, 246, 0.8);
+}
+
+/* nút lưu album / media */
+#btnSaveAlbum,
+#btnSaveMedia {
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+    color: #ffffff;
+    box-shadow: 0 10px 26px rgba(34, 197, 94, 0.7);
+}
+
+/* bảng album/media sáng */
+#albumsTable,
+#mediaTable {
+    background: #ffffff;
+    box-shadow: 0 12px 30px rgba(148, 163, 184, 0.6);
+    color: #111827;
+}
+
+#albumsTable thead,
+#mediaTable thead {
+    background: #e5edff;
+}
+
+#albumsTable th,
+#mediaTable th {
+    color: #4b5563;
+}
+
+#albumsTable tbody tr,
+#mediaTable tbody tr {
+    background: #ffffff;
+}
+
+#albumsTable tbody tr:nth-child(odd),
+#mediaTable tbody tr:nth-child(odd) {
+    background: #f9fafb;
+}
+
+#albumsTable tbody tr:hover,
+#mediaTable tbody tr:hover {
+    background: #fff7ed;
+    box-shadow: 0 10px 24px rgba(248, 181, 129, 0.5);
+}
+
+/* nút trong bảng */
+.table-btn,
+#albumsTable button,
+#mediaTable button {
+    background: linear-gradient(135deg, #f97316, #ec4899);
+    border: none;
+    color: #ffffff;
+    box-shadow: 0 6px 16px rgba(248, 113, 113, 0.6);
+}
+
+.table-btn:hover,
+#albumsTable button:hover,
+#mediaTable button:hover {
+    box-shadow: 0 10px 22px rgba(248, 113, 113, 0.8);
+}
+
+/* thumbnail ảnh */
+#mediaTable img {
+    box-shadow: 0 6px 16px rgba(148, 163, 184, 0.7);
+}
